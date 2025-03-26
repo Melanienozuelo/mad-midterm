@@ -46,11 +46,10 @@ void playAudio() async {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pinoy Food Flip & Find'),
+        title: const Text('Fiesta Pick'),
         centerTitle: true,
         backgroundColor: Colors.deepOrange.shade900,
         foregroundColor: Colors.white,
-        // leading: Icon(Icons.camera_enhance),
         actions: [
           Padding(
             padding: const EdgeInsets.only(top: 5),
@@ -83,7 +82,7 @@ void playAudio() async {
                      child: Text('Easy'),
                       style: ElevatedButton.styleFrom(
                         textStyle: TextStyle(
-                          fontSize: 16,
+                          fontSize: 18,
                         ),
                         foregroundColor: Colors.deepOrange.shade900,
                         minimumSize: Size(200, 60),
@@ -101,7 +100,7 @@ void playAudio() async {
                     child: Text('Medium'),
                       style: ElevatedButton.styleFrom(
                         textStyle: TextStyle(
-                          fontSize: 16,
+                          fontSize: 18,
                         ),
                         foregroundColor: Colors.deepOrange.shade900,
                         minimumSize: Size(200, 60),
@@ -119,7 +118,7 @@ void playAudio() async {
                     child: Text('Hard'),
                       style: ElevatedButton.styleFrom(
                         textStyle: TextStyle(
-                          fontSize: 16,
+                          fontSize: 18,
                         ),
                         foregroundColor: Colors.deepOrange.shade900,
                         minimumSize: Size(200, 60),

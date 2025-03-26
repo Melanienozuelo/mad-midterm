@@ -1,9 +1,9 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:mad_midtermproject/box.dart';
 import 'package:mad_midtermproject/screens/home_screen.dart';
-import 'package:quickalert/quickalert.dart';
 import 'data.dart';
 import 'dart:async';
 
@@ -36,18 +36,12 @@ class _FlipCardGameState extends State<FlipCardGame> {
   Widget getItem(int index) { 
     return Container(
       decoration: BoxDecoration(
-          color: Colors.grey[100],
-          // boxShadow: const [
-          //   BoxShadow(
-          //     color: Colors.black45,
-          //     blurRadius: 3,
-          //     spreadRadius: 0.8,
-          //     offset: Offset(2.0, 1),
-          //   )
-          // ],
-          borderRadius: BorderRadius.circular(5)),
+        color: Colors.grey[100],
+        borderRadius: BorderRadius.circular(5)),
       margin: EdgeInsets.all(4.0),
-      child: Image.asset(_data[index], fit: BoxFit.cover,),
+      child: Image.asset(_data[index], 
+      fit: BoxFit.cover,
+      ),
     );
   }
 
@@ -56,7 +50,7 @@ class _FlipCardGameState extends State<FlipCardGame> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Pinoy Food Flip & Find"),
+        title: const Text("Fiesta Pick"),
         centerTitle: true,
         backgroundColor: Colors.deepOrange.shade900,
         foregroundColor: Colors.white,
@@ -98,7 +92,7 @@ class _FlipCardGameState extends State<FlipCardGame> {
                         ),
                       ),
                     ),
-                            SizedBox(height: 10),
+                           Gap(8),
                             Container(
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -207,36 +201,70 @@ class _FlipCardGameState extends State<FlipCardGame> {
                                         if (highScore == null || _elapsedSeconds < highScore) {
                                           _newHighScore();
                                         }
-                                        Future.delayed(const Duration(milliseconds: 800), () {
-                                          QuickAlert.show(
-                                            context: context,
-                                            title: 'Level Completed!',
-                                            titleColor: Colors.deepOrange.shade900,
-                                            type: QuickAlertType.success,
-                                            confirmBtnColor: Colors.deepOrange.shade900,
-                                            widget: Column(
-                                              children: [
-                                                Text(
-                                                  'Highest Score: $highScore seconds',
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: Colors.deepOrange.shade900,
-                                                    
-                                                    ),
-                                                    textAlign: TextAlign.center,
+                                    Future.delayed(const Duration(milliseconds: 800), () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(15),
+                                          ),
+                                          title: Text('Level Completed!',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.deepOrange.shade900,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min, 
+                                            children: [
+                                              Text(
+                                                'Highest Score: $highScore seconds',
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.deepOrange.shade900,
                                                 ),
-                                                Text(
-                                                  'Time: $_elapsedSeconds seconds',
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: Colors.deepOrange.shade900
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              Gap(5),
+                                              Text(
+                                                'Time: $_elapsedSeconds seconds',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.deepOrange.shade900,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ],
+                                          ),
+                                          actions: [
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                TextButton(
+                                                  style: TextButton.styleFrom(
+                                                    backgroundColor: Colors.deepOrange.shade900,
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(10),
                                                     ),
-                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop(); 
+                                                  },
+                                                  child: Text('Okay',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 16,
+                                                      ),
+                                                  ),
                                                 ),
                                               ],
                                             ),
-                                          );
-
+                                          ],
+                                        );
+                                      },
+                                    );
                                           setState(() { print('Completed!');
                                             _isFinished = true;
                                             _start = false;
